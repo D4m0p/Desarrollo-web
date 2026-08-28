@@ -1,4 +1,4 @@
-# Práctica 1 - PHP
+# Laboratorio 1 - PHP
 
 Ejercicios y laboratorios de práctica en PHP.
 
