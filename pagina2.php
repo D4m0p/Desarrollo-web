@@ -69,7 +69,8 @@ if (!empty($listaErrores)) {
     echo "El nombre es: " . htmlspecialchars($Nombre) . "<br>";
     echo "La edad es: " . htmlspecialchars($Edad) . "<br>";
 
-    if ($Edad > 18) {
+    // En Panamá la mayoría de edad es a los 18 años, por eso se incluye el 18 con >=
+    if ($Edad >= 18) {
         echo "Usted puede votar en las próximas elecciones 2028.";
     } else {
         echo "Usted no es mayor de edad.";
