@@ -33,6 +33,16 @@ $listaErrores = [];
 $Nombre = trim($_POST['nombre'] ?? '');
 if (!is_string($Nombre) || empty($Nombre)) {
     $listaErrores[] = "Debe escribir su nombre, el campo no puede quedar vacío.";
+} elseif (!preg_match('/^[\p{L}\s]+$/u', $Nombre)) {
+    // \p{L} acepta cualquier letra (también con tilde o ñ); la bandera u lee el texto como UTF-8
+    $listaErrores[] = "El nombre solo puede tener letras y espacios, sin números ni símbolos.";
+} else {
+    // Mayúscula inicial en cada palabra: "josé pérez" -> "José Pérez".
+    // mb_convert_case() respeta las tildes; si la extensión mbstring no está instalada
+    // se usa ucwords(), que solo convierte bien las iniciales sin tilde
+    $Nombre = function_exists('mb_convert_case')
+        ? mb_convert_case($Nombre, MB_CASE_TITLE, 'UTF-8')
+        : ucwords(strtolower($Nombre));
 }
 
 // --- Edad ---
