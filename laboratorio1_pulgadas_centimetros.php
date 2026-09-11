@@ -6,8 +6,8 @@
 <style>
     body { font-family: "Segoe UI", Arial, sans-serif; background: #eceff1; color: #263238; padding: 25px; }
     .caja { background: #fff; border: 1px solid #cfd8dc; border-radius: 6px; padding: 18px; max-width: 340px; }
-    input[type="text"] { width: 100%; padding: 6px; margin: 6px 0 12px 0; box-sizing: border-box;
-                         border: 1px solid #b0bec5; border-radius: 4px; }
+    input[type="number"] { width: 100%; padding: 6px; margin: 6px 0 12px 0; box-sizing: border-box;
+                           border: 1px solid #b0bec5; border-radius: 4px; }
     input[type="submit"] { width: 100%; padding: 8px; border: 0; border-radius: 4px;
                            background: #37474f; color: #fff; cursor: pointer; }
     input[type="submit"]:hover { background: #263238; }
@@ -24,7 +24,10 @@
 <div class="caja">
 <form method="post" action="">
     <label for="pulgadas">Leer las pulgadas:</label>
-    <input type="text" name="pulgadas" id="pulgadas">
+    <!-- Validación HTML5 en el navegador (número, no negativo, obligatorio);
+         el servidor vuelve a validar abajo. value conserva el último dato enviado -->
+    <input type="number" step="any" min="0" required name="pulgadas" id="pulgadas"
+           value="<?php echo htmlspecialchars($_POST['pulgadas'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
     <input type="submit" value="Convertir">
 </form>
 </div>
